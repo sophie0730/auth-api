@@ -3,6 +3,10 @@ HTTP RESTful APIs for account and password management.
 
 ## Contents
 
+
+## Project Structure
+Project Sturcture is followed by [FastAPI Best Practices](https://github.com/zhanymkanov/fastapi-best-practices#1-project-structure-consistent--predictable)
+
 ## Solution Details
 - Impletmented two **RESTful APIs** for creating and verifying accounts and passwords.
 - Used **Python** and **FastAPI** for backend development.
@@ -12,10 +16,10 @@ HTTP RESTful APIs for account and password management.
 - Used **Redis** for limiting the maximum retry count.
 - Packed the solution in a **Docker image**, and pushed it to **Docker Hub**.
 - Implemented **ruff** and **pre-commit** for consistent coding style.
-- Used **GitHub Actions** for CI/CD.
 - Created and maintained a API document using **Swagger UI**.
 
 ## Start
+
 
 
 ## API Doc (Overview)
@@ -41,7 +45,7 @@ This section is a overview for these two RESTful API. For the detailed informati
 | username | String | Required. 3~32 characters. |
 | password | String | Required. 8~32 characters.  containing at least 1 uppercase letter, 1 lowercase letter, and 1 number
 
-* **Success Response: 200 (JSON Payload)**
+* **Success Response: 201 (JSON Payload)**
 
 | Field | Type | Description |
 | :---: | :---: | :--- |
@@ -49,6 +53,13 @@ This section is a overview for these two RESTful API. For the detailed informati
 | reason | String | Return a empty string. The reason for a failed account creation process. |
 
 * **Client Error Response: 400 (JSON Payload)**
+
+| Field | Type | Description |
+| :---: | :---: | :--- |
+| success | Boolean | Return False. The outcome of the account creation process. |
+| reason | String | The reason for a failed account creation process. |
+
+* **Client Error Response: 422 (JSON Payload)**
 
 | Field | Type | Description |
 | :---: | :---: | :--- |
