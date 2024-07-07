@@ -39,16 +39,17 @@ jobs:
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
-    - name: Set environment variables
-      run: |
-        echo "DATABASE_URL=mysql+pymysql://root:root_password@localhost:3306/auth" >> $GITHUB_ENV
     
     - name: Wait for MySQL to be ready
+      env:
+        DATABASE_URL=mysql+pymysql://root:root_password@localhost:3306/auth
       run: |
+        echo "Checking MySQL service status..."
         while ! mysqladmin ping -h"localhost" --silent; do
           echo "Waiting for database connection..."
           sleep 2
         done
+        echo "MySQL is up and running"
 
     - name: Run tests
       run: |
