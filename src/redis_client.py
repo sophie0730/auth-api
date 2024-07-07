@@ -4,6 +4,7 @@ import redis
 
 from src.config import REDIS_URL
 from src.exceptions import CustomHTTPException
+from src.logging import logger
 
 MAX_RETRIES = 1
 
@@ -20,6 +21,7 @@ def try_command(f, *args, **kwargs):
             count += 1
 
             if count > MAX_RETRIES:
+                logger.critical(str(e))
                 raise CustomHTTPException(
                     status_code=500, reason=f"Internal Server Error: {str(e)}"
                 )

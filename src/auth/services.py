@@ -8,6 +8,7 @@ from src.auth.rate_limiter import check_lockout, record_failed_attempt, reset_fa
 from src.auth.schemas import User as ValidUser
 from src.database import get_db
 from src.exceptions import CustomHTTPException
+from src.logging import logger
 
 
 def get_user(username: str, db: Session = Depends(get_db)):
@@ -30,6 +31,7 @@ def create_user(user: ValidUser, db: Session = Depends(get_db)):
 def verify_user(username: str, password: str, db: Session = Depends(get_db)):
     try:
         if check_lockout(username):
+            logger.warning(f"User {username} is locked out due to too many failed login attempts.")
             raise CustomHTTPException(
                 status_code=429,
                 reason="You have failed to login five times, please wait one minute to login again",
