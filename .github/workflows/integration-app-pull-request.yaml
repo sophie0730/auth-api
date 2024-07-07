@@ -8,6 +8,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: auth
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
 
     steps:
     - name: Checkout code
@@ -25,6 +38,17 @@ jobs:
 
     - name: Set PYTHONPATH
       run: echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
+
+    - name: Set environment variables
+      run: |
+        echo "DATABASE_URL=mysql+pymysql://root:root_password@localhost:3306/test_db" >> $GITHUB_ENV
+    
+    - name: Wait for MySQL to be ready
+      run: |
+        while ! mysqladmin ping -h"localhost" --silent; do
+          echo "Waiting for database connection..."
+          sleep 2
+        done
 
     - name: Run tests
       run: |
