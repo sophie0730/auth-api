@@ -41,7 +41,7 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo "DATABASE_URL=mysql+pymysql://root:root_password@localhost:3306/test_db" >> $GITHUB_ENV
+        echo "DATABASE_URL=mysql+pymysql://root:root_password@localhost:3306/auth" >> $GITHUB_ENV
     
     - name: Wait for MySQL to be ready
       run: |
