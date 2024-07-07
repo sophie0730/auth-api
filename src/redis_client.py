@@ -6,7 +6,7 @@ from src.config import REDIS_URL
 from src.exceptions import CustomHTTPException
 from src.logging import logger
 
-MAX_RETRIES = 1
+MAX_RETRIES = 3
 
 redis_client = redis.StrictRedis.from_url(REDIS_URL, decode_responses=True)
 
