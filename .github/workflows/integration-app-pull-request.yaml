@@ -26,6 +26,11 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run tests
+      env:
+        DATABASE_URL: "mysql+mysqlconnector://testuser:123$@localhost/auth"  
+        REDIS_URL: "redis://localhost:6379/0"  
+        USE_MOCK_DB: "True"  
+        USE_MOCK_REDIS: "True"
       run: |
         # Export environment variables to use Mock configurations
         export USE_MOCK_DB=True
