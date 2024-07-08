@@ -4,7 +4,7 @@ import redis.asyncio as redis
 
 from src.config import REDIS_URL
 from src.exceptions import CustomHTTPException
-from src.logging import logger
+from src.log import logger
 
 MAX_RETRIES = 3
 

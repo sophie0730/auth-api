@@ -1,10 +1,12 @@
-# Ignore virtual environment
-auth-api/
-
-# Ignore Python cache files
-__pycache__/
-*.py[cod]
-
-# Ignore other common files
-.env
+mysql/
+.dev.env
+.prod.env
+.pytest_cache
+.gitignore
 *.log
+*.toml
+*.md
+auth-api/
+__pycache__
+volumes/
+logs/*.log
