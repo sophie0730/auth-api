@@ -3,6 +3,9 @@ name: Python application
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
   build:
 
@@ -15,7 +18,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12'  
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
@@ -24,7 +27,12 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest --junitxml=reports/results.xml 
+        # Export environment variables to use Mock configurations
+        export USE_MOCK_DB=True
+        export USE_MOCK_REDIS=True
+
+        mkdir -p reports
+        pytest --junitxml=reports/results.xml
 
     - name: Publish Test Report
       uses: actions/upload-artifact@v2
