@@ -8,3 +8,4 @@ mysql/
 auth-api/
 __pycache__
 volumes/
+logs/*.log

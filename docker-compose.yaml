@@ -9,6 +9,8 @@ services:
       - .prod.env
     ports:
       - 8000:8000
+    volumes:
+      - ./volumes/logs:/app/logs
     depends_on:
       db:
         condition: service_healthy
@@ -23,7 +25,7 @@ services:
     ports:
       - 3307:3306
     volumes:
-      - ./volumes/db_data:/var/lib/mysql
+      - db_volume:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -36,8 +38,11 @@ services:
       - 6379:6379
     restart: always
     volumes:
-      - ./volumes/redis_data:/data
+      - redis_volume:/data
 
+volumes:
+  db_volume:
+  redis_volume:
 
 networks:
   default:
