@@ -1,6 +1,8 @@
 import os
 import sys
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import pytest
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
@@ -9,7 +11,6 @@ from src.database import get_db
 from src.main import app
 
 client = TestClient(app)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
 class MockSession:
@@ -44,7 +45,7 @@ def client_with_db():
 
 # Test successful signup
 def test_signup_success(client_with_db):
-    test_payload = {"username": "testuser", "password": "Testpassword123"}
+    test_payload = {"username": "sophie_test", "password": "Sophietest123"}
     response = client_with_db.post("/api/v1/signup", json=test_payload)
     assert response.status_code == 201
     assert response.json() == {"success": True, "reason": "User created successfully"}
