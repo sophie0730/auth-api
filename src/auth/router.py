@@ -154,6 +154,6 @@ def signup(user: User, db: Session = Depends(get_db)):
         },
     },
 )
-def signin(user: User, db: Session = Depends(get_db)):
-    verify_user(user.username, user.password, db)
+async def signin(user: User, db: Session = Depends(get_db)):
+    await verify_user(user.username, user.password, db)
     return ResponseModel(success=True, reason="User sign in successfully")

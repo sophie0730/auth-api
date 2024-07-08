@@ -1,6 +1,6 @@
 import time
 
-import redis
+import redis.asyncio as redis
 
 from src.config import REDIS_URL
 from src.exceptions import CustomHTTPException
@@ -8,15 +8,15 @@ from src.logging import logger
 
 MAX_RETRIES = 3
 
-redis_client = redis.StrictRedis.from_url(REDIS_URL, decode_responses=True)
+redis_client = redis.Redis.from_url(REDIS_URL, decode_responses=True)
 
 
-def try_command(f, *args, **kwargs):
+async def try_command(f, *args, **kwargs):
     count = 0
 
     while True:
         try:
-            return f(*args, **kwargs)
+            return await f(*args, **kwargs)
         except redis.ConnectionError as e:
             count += 1
 

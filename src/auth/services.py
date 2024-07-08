@@ -28,9 +28,9 @@ def create_user(user: ValidUser, db: Session = Depends(get_db)):
         raise CustomHTTPException(status_code=500, reason=f"Internal Server Error: {str(e)}")
 
 
-def verify_user(username: str, password: str, db: Session = Depends(get_db)):
+async def verify_user(username: str, password: str, db: Session = Depends(get_db)):
     try:
-        if check_lockout(username):
+        if await check_lockout(username):
             logger.warning(f"User {username} is locked out due to too many failed login attempts.")
             raise CustomHTTPException(
                 status_code=429,
@@ -40,11 +40,11 @@ def verify_user(username: str, password: str, db: Session = Depends(get_db)):
         current_user = get_user(username, db)
 
         if not current_user:
-            handled_failed_attempt(username, "The username doesn't exist", 404)
+            await handled_failed_attempt(username, "The username doesn't exist", 404)
         if not verify_password(password, current_user.password):
-            handled_failed_attempt(username, "The password is wrong", 400)
+            await handled_failed_attempt(username, "The password is wrong", 400)
 
-        reset_failed_attemps(username)
+        await reset_failed_attemps(username)
 
     except CustomHTTPException as e:
         raise e
@@ -52,6 +52,6 @@ def verify_user(username: str, password: str, db: Session = Depends(get_db)):
         raise CustomHTTPException(status_code=500, reason=f"Internal Server Error: {str(e)}")
 
 
-def handled_failed_attempt(username: str, reason: str, status_code: int):
-    record_failed_attempt(username)
+async def handled_failed_attempt(username: str, reason: str, status_code: int):
+    await record_failed_attempt(username)
     raise CustomHTTPException(status_code=status_code, reason=reason)
