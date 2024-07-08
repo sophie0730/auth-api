@@ -1,0 +1,17 @@
+test/
+.db.env
+.dev.env
+.dev.env.example
+.prod.env
+.pre-commit-config.yaml
+auth-api/
+.pytest_cache
+.gitignore
+*.log
+*.toml
+*.md
+*/__pycache__/
+__pycache__/
+*.yaml
+mysql/
+volumes/

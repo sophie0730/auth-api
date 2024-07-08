@@ -8,7 +8,7 @@ from src.auth.rate_limiter import check_lockout, record_failed_attempt, reset_fa
 from src.auth.schemas import User as ValidUser
 from src.database import get_db
 from src.exceptions import CustomHTTPException
-from src.logging import logger
+from src.log import logger
 
 
 def get_user(username: str, db: Session = Depends(get_db)):
