@@ -1,5 +1,6 @@
 mysql/
 .dev.env
+.prod.env
 .pytest_cache
 .gitignore
 *.log

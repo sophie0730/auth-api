@@ -1,5 +1,5 @@
 # Use the official Python image as a base image
-FROM python:3.12-alpine as base
+FROM --platform=$BUILDPLATFORM python:3.12-alpine as base
 
 # Set up a build stage for installing dependencies
 FROM base as builder
