@@ -1,7 +1,7 @@
 # Use the official Python image as a base image
 FROM --platform=$BUILDPLATFORM python:3.12-alpine as base
 
-LABEL version="1.1"
+LABEL version="1.2.1"
 
 # Set up a build stage for installing dependencies
 FROM base as builder

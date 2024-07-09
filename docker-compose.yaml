@@ -1,23 +1,6 @@
 version: '3.8'
 
 services:
-  app:
-    image: sophiehsu/auth-api:1.1
-    environment:
-      - ENV=production
-    env_file:
-      - .prod.env
-    ports:
-      - 8000:8000
-    volumes:
-      - ./logs_prod:/app/logs
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-
-
   db:
     image: mysql:8.0
     env_file:
@@ -39,6 +22,20 @@ services:
     restart: always
     volumes:
       - redis_volume:/data
+  
+  app:
+    image: sophiehsu/auth-api:1.2.1
+    environment:
+      - ENV=production
+    env_file:
+      - .prod.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./logs_prod:/app/logs
+    depends_on:
+      - db
+      - redis
 
 volumes:
   db_volume:

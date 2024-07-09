@@ -2,11 +2,11 @@ from fastapi import Depends
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from src.auth.dependencies import get_db
 from src.auth.hashing import hash_password, verify_password
 from src.auth.models import User
 from src.auth.rate_limiter import check_lockout, record_failed_attempt, reset_failed_attemps
 from src.auth.schemas import User as ValidUser
-from src.database import get_db
 from src.exceptions import CustomHTTPException
 from src.log import logger
 
