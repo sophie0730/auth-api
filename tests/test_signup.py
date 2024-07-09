@@ -7,7 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 from pydantic import BaseModel
 
-from src.database import get_db
+from src.auth.dependencies import get_db
 from src.main import app
 
 client = TestClient(app)

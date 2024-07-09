@@ -8,7 +8,6 @@ ATTEMPT_RESET_TIME = 600  # 登入失敗重置時間
 async def check_lockout(username: str):
     lockout_key = f"lockout:{username}"
     result = await try_command(redis_client.exists, lockout_key)
-    print(result)
     return result
 
 
