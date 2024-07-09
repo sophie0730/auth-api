@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: sophiehsu/auth-api:1.0
+    image: sophiehsu/auth-api:1.1
     environment:
       - ENV=production
     env_file:
@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./logs:/app/logs
+      - ./logs_prod:/app/logs
     depends_on:
       db:
         condition: service_healthy

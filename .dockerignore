@@ -2,6 +2,7 @@ test/
 .db.env
 .dev.env
 .dev.env.example
+.prod.env.example
 .prod.env
 .pre-commit-config.yaml
 auth-api/
