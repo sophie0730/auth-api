@@ -91,7 +91,7 @@ This project utilizes the `logging` module to record critical and warning level 
 - Redis server downtime 
 - 429 too many requests 
 
-**Notes:** The logs are generated inside the container but are stored in local storage `<your-repo-path>/logs` for easier monitoring and data persistence.
+**Notes:** The logs are generated inside the container but are stored in local storage `<your-repo-path>/logs_prod` for easier monitoring and data persistence.
 
 # API Doc (Overview)
 This section is an overview for these two RESTful API. For the detailed information, please refer to the Swagger API Document(http://localhost:8000/docs) after you run the container.
