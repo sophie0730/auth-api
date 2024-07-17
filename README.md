@@ -53,7 +53,7 @@ There are two versions of the image for different CPU architectures: `linux/amd`
 ```
 docker compose up -d
 ```
-### 4. Naviagate API Document
+### 4. Navigate API Document
 You can navigate the API Document for reference of the following tests.
 ```
 http://localhost:8000/docs
